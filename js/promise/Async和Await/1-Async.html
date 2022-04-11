@@ -1,0 +1,29 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async</title>
+</head>
+<body>
+    
+    <script>
+        async function main(){
+            // 返回值规则和then一样
+            // 1. 是非Promise，结果是成功的Promise对象
+            // return " "
+
+            // 2. 是Promise，返回值的Promise决定了最终返回的Promise状态
+            // return Promise.resolve("OK")
+            // return Promise.reject("ERR")
+
+            // 3. 抛出异常，返回失败Promise对象
+            throw "ERR!!"
+            
+
+        }
+        let result=main()
+        console.log(result);
+    </script>
+</body>
+</html>

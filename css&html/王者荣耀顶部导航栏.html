@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王者荣耀顶部导航栏</title>
+    <style>
+        body {
+            background: white url(imgs/wzbg.jpg) no-repeat fixed top;
+            /* background-image: url(imgs/wzbg.jpg);
+            background-repeat: no-repeat;
+            background-position: center top; */
+        }
+
+        .header-nav {
+            position: relative;
+            width: 1300px;
+            height: 84px;
+            padding-left: 230px;
+            margin: 0 auto;
+            /* background-image: url(imgs/王者荣耀logo.png);
+            background-repeat: no-repeat;
+            background-position: 0px 42px;
+            /* 背景图像固定 */
+            /* background-attachment: fixed; */
+            display: block;
+            list-style: none;
+        }
+
+        .logo {
+            display: inline-block;
+            width: 200px;
+            height: 84px;
+            background: url(imgs/王者荣耀logo.png) no-repeat scroll left;
+        }
+
+        .header-nav li {
+            float: left;
+            width: 115px;
+            height: 84px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            display: list-item;
+        }
+
+        .header-nav a {
+            color: #c9c9dd;
+            font: 18px/1.5 "Microsof YaHei", Tahoma, "simsun", sans-serif;
+            line-height: 50px;
+            /* font-style: 24px; */
+
+            text-decoration: none;
+
+        }
+
+        .header-nav em {
+            font-size: 12px;
+            color: #858792;
+            line-height: 16px;
+            padding-top: 3px;
+            font-style: normal;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+        <ul class="header-nav">
+            <li>
+                <div class="logo"></div>
+            </li>
+            <li>
+                <a>游戏资料
+                    <em>DATA</em>
+                </a>
+            </li>
+            <li>
+                <a href="#">内容中心
+                    <em>CONTENTS</em>
+                </a>
+            </li>
+            <li>
+                <a href="#">赛事中心
+                    <em>MATCH</em>
+                </a>
+            </li>
+            <li>
+                <a href="#">百态王者
+                    <em>CUTURE</em>
+                </a>
+            </li>
+            <li>
+                <a href="#">社区互动
+                    <em>COMMUNITY</em>
+                </a>
+            </li>
+            <li>
+                <a href="#">王家支持
+                    <em>PLAYER</em>
+                </a>
+            </li>
+            <li>
+                <a href="#">IP新游
+                    <em>NEWS GAMES</em>
+                </a>
+            </li>
+            <li class="nav-search"></li>
+        </ul>
+    </div>
+
+</body>
+
+</html>

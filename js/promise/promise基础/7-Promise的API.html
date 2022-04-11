@@ -1,0 +1,156 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise API</title>
+    <!-- <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css" rel="stylesheet"> -->
+</head>
+<body>
+    <div class="container">
+        <h1>打印Promise API</h1>
+        <button class="btn btn-secondary">反转flag：true</button>
+        <h2>构造函数 Promise (excutor) {}</h2>
+        <p>executor是执行器函数：会在Promise内部立即<b>同步调用</b>，即调用构造函数时立即执行</p>
+        <button class="btn btn-primary">例子</button>
+
+        <h2>Promise.prototype.then 方法</h2>
+        <p>指定成功回调和失败回调的方法</p>
+        <button class="btn btn-primary">例子</button>
+
+        <h2>Promise.prototype.catch 方法</h2>
+        <p>指定失败回调的方法</p>
+        <button class="btn btn-primary">例子</button>
+
+        <h2>Promise.resolve 方法</h2>
+        <p>如果传入的参数为 非Promise对象，返回的结果为成功的promise对象</p>
+        <p>如果传入的参数为 Promise对象，匿名传入的Promise对象决定了返回结果</p>
+        <button class="btn btn-primary">传入非Promise对象</button>
+        <button class="btn btn-primary">传入Promise对象</button>
+
+        <h2>Promise.reject 方法</h2>
+        <p>不论传入的参数为 非Promise对象还是成功或失败的Promise对象，返回的结果都是<b>失败</b>的promise对象</p>
+        <button class="btn btn-primary">传入非Promise对象</button>
+        <button class="btn btn-primary">传入Promise对象</button>
+        
+        <h2>Promise.all 方法</h2>
+        <p>传入一组Promise对象的数组</p>
+        <p>所有都成功，则返回成功Promise对象，值为成功结果的数组；有失败，返回失败成功Promise对象，值为第一个失败</p>
+        <button class="btn btn-primary">例子</button>
+
+        <h2>Promise.race 方法</h2>
+        <p>传入一组Promise对象的数组</p>
+        <p>返回Promise对象，第一个改变Promise状态的结果</p>
+        <button class="btn btn-primary">例子</button>
+    </div>
+
+    <script>
+        var btns=document.querySelectorAll('.btn-primary');
+        var btnFlag=document.querySelector('.btn-secondary');
+        var flag=true
+        btnFlag.addEventListener("click",function(){
+            flag=!flag;
+            this.innerHTML="反转flag："+flag;
+        })
+
+        // excecutor
+        btns[0].addEventListener("click",function(){
+            let p=new Promise((resolve,reject)=>{
+                console.log("executor执行器函数会立即执行！");
+            });
+            console.log("先executor，再其它");
+        });
+
+        // then()
+        btns[1].addEventListener("click",function(){
+            let p=new Promise((resolve,reject)=>{
+                if (flag) resolve('success!');
+                else reject("error!");
+            });
+            p.then(
+                value=>console.log(value),
+                reason=>console.log(reason)
+            );
+        })
+        
+
+        // catch()
+        btns[2].addEventListener("click",function(){
+            let p=new Promise((resolve,reject)=>{
+                reject("error!");
+            });
+            p.catch(reason=>console.log(reason));
+        })
+
+        // resolve()
+        // 如果传入的参数为 非Promise对象，返回的结果为成功的promise对象
+        // 如果传入的参数为 Promise对象，传入的Promise对象决定了返回结果
+        btns[3].addEventListener("click",function(){
+            let p=Promise.resolve(123);
+            console.log(p);
+        })
+        btns[4].addEventListener("click",function(){
+            let p=Promise.resolve(new Promise((resolve,reject)=>{
+                if (flag) resolve("success!")
+                else reject("error!")
+            }))
+            console.log(p);
+            // 可以加上一个失败的回调处理，不然浏览器会报错
+            p.catch(reason=>{console.log("catch error");})
+        })
+
+        // reject()
+        // 如果传入的参数为 非Promise对象，返回的结果为失败的promise对象
+        // 如果传入的参数为 Promise对象，返回的结果为失败的promise对象
+        btns[5].addEventListener("click",function(){
+            let p=Promise.reject(123);
+            console.log(p);
+            p.catch(reason=>{console.log("catch error",reason);})
+        })
+        btns[6].addEventListener("click",function(){
+            let p=Promise.reject(new Promise((resolve,reject)=>{
+                if (flag) resolve("success!")
+                else reject("error!")
+            }))
+            console.log(p);
+            // 可以加上一个失败的回调处理，不然浏览器会报错
+            p.catch(reason=>{console.log("catch error");})
+        })
+        
+        // all()
+        btns[7].addEventListener("click",function(){
+            let p1=new Promise((resolve,reject)=>{
+                if (flag) resolve("OK1");
+                else reject("error1!");
+            });
+            let p2=Promise.resolve("OK2");
+            let p3=Promise.resolve("OK3");
+            let p4=new Promise((resolve,reject)=>{
+                if (flag) resolve("OK1");
+                else reject("error1!");
+            });
+
+            const result=Promise.all([p1,p2,p3,p4]);
+            console.log(result);
+        })
+
+        // all()
+        btns[8].addEventListener("click",function(){
+            let p1=new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    if (flag) resolve("OK1");
+                    else reject("error1!");
+                },3000)      
+            });
+            let p2=new Promise((resolve,reject)=>{
+                if (flag) resolve("OK2");
+                else reject("error2!");
+            });
+            let p3=Promise.resolve("OK3");
+
+            const result=Promise.race([p1,p2,p3]);
+            console.log(result);
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>理解事件处理程序</p>
+    <p>1. HTML事件处理程序</p>
+    <!-- <input type="button" value="直接输出" onclick="console.log(&quot;Clicked&quot;)"/> -->
+    <input type="button" value="理解event局部变量" 
+        onclick="console.log(`event: ${event}\nevent.target.value: ${event.target.value}`)"/>
+    <input type="button" value="理解标签内部的this指向目标元素" 
+        onclick="console.log(`this: ${this}\nthis.value: ${this.value}`)"/>
+    <input type="button" value="可以直接访问自己的value属性" 
+        onclick="console.log(`value: ${value}`)"/>
+    <input type="button" value="调用外部函数，理解函数内部的this指向window" onclick="show()"/>
+    <!-- ？？？？？？？？？？？？？ -->
+    <input type="button" value="可以封装在try/catch里" onclick="try{show();}catch(ex) {}">
+    <form method="post">
+        <input type="text" name="username" value="其他表单成员">
+        <input type="button" value="访问其他表单成员" onclick="console.log(username.value)">
+    </form>      
+    <p>2. DOM0事件处理程序</p>  
+    <button id="btnDOM0">理解函数体里的this</button>
+    <p>3. DOM2事件处理程序</p>
+    <button id="btnDOM2">理解函数体里的this</button>
+    <p>4. IE事件处理程序，只在IE浏览器生效，IE11不支持</p>
+    <button id="btnIE">理解函数体里的this</button>
+
+<script>
+    // 1 html
+    function show(){
+        console.log("函数体里的this是指向全局变量window的")
+        console.log("this:",this);
+        console.log("函数需要在被调用之前定义，不然会报错，封装在try/catch里可以解决")
+    }
+
+    // 2 DOM0
+    let btnDOM0=document.getElementById("btnDOM0")
+    btnDOM0.onclick=function(){
+        console.log("匿名函数里的this指向目标元素")
+        console.log("this: ",this);
+        console.log("this.id: ",this.id);
+        console.log("event: ",event);
+    }
+    btnDOM0.onclick=showDOMThis
+    // btnDOM0.onclick=null
+
+
+    // 3 DOM2
+    // 可以传入唯一的参数 event
+    // 可以添加多个事件处理函数，顺序执行
+    let btnDOM2=document.getElementById("btnDOM2")
+    btnDOM2.addEventListener("click",function(event){
+        console.log("event.target",event.target)
+        console.log("匿名函数里的this指向目标元素")
+        console.log("this:",this);
+        console.log("this.id:",this.id);
+    })
+    btnDOM2.addEventListener("click", showDOMThis)
+    // 无法删除匿名函数
+    // btnDOM2.removeEventListener("click",showDOMThis)
+    function showDOMThis(event){
+        console.log("命名函数里的this也指向目标元素")
+        console.log("this:",this);
+        console.log("this.id:",this.id);
+        console.log("event: ",event);
+    }
+    btnDOM2.addEventListener("click",function(event){
+        console.log("111")
+    })
+    
+
+
+    // 4 IE
+    // 添加多个事件处理函数，会逆序执行
+    // let btnIE=document.getElementById("btnIE")
+    // btnIE.attachEvent("onclick",function(){
+    //     console.log("匿名函数里的this指向window")
+    //     console.log("this:",this);
+    //     console.log("this===window:",this===window);
+    // })
+    // btnIE.attachEvent("onclick",showIEThis)
+    // // btnIE.detachEvent("onclick",showIEThis)
+
+    // function showIEThis(){
+    //     console.log("命名函数里的this指向window")
+    //     console.log("this:",this);
+    //     console.log("this===window:",this===window);
+    // }
+
+</script>
+</body>
+</html>

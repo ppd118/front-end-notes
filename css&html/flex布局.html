@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .backgrd {
+            width: 500px;
+            height: 300px;
+            background-color: rgb(128, 128, 184);
+            display: flex;
+            /* 指定主轴及方向 */
+            /* flex-direction: row-reverse; */
+
+            /* 指定主轴上的元素排列的方式 */
+            /* flex-start  flex-end center space-around space-between*/
+            justify-content: space-between;
+
+            /* 设置子元素是否换行 */
+            flex-wrap: wrap;
+
+            /* 设置侧轴排列方式 单行*/
+            /* align-items: center; */
+
+            /* 设置侧轴排列方式 多行*/
+            align-content: center;
+
+            /* flex-direction  flex-wrap 合写的简写*/
+            /* flex-flow: column wrap; */
+        }
+
+        .backgrd span {
+            width: 100px;
+            height: 50px;
+            margin: 0 5px 5px 0;
+            background-color: rgb(72, 117, 168);
+            color: #fff;
+        }
+
+        .header {
+            width: 60%;
+            height: 300px;
+            margin: 10px auto;
+            background-color: #c5c5c5;
+            display: flex;
+        }
+
+        .header div:nth-child(1) {
+            width: 100px;
+            height: 150px;
+            background-color: cadetblue;
+        }
+
+        .header div:nth-child(3) {
+            width: 100px;
+            height: 150px;
+            align-self: start;
+            background-color: #add16a;
+        }
+
+        .header div:nth-child(2) {
+            flex: 1;
+            background-color: #d16a6f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="backgrd">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+    </div>
+    <div class="header">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+
+</html>

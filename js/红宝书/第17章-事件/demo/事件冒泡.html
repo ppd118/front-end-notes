@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>memory leak</title>
+  <style>
+    div{
+      padding: 10px;
+      border: 1px solid pink;
+    }
+    button{
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div id="first">first
+    <div id="second">second
+      <button id="button">冒泡</button>
+    </div>
+  </div>
+  <button id="btn-stop">拦截：false</button>
+  <script>
+    var button = document.getElementById('button'),
+        second = document.getElementById('second'),
+        first = document.getElementById('first'),
+        body = document.body,
+        html = document.documentElement;
+    var flag=false
+    // 第三个参数默认为false，采用事件冒泡
+    // 为true时是事件捕获
+    var stop=false
+    var btnStop=document.getElementById('btn-stop')
+    btnStop.addEventListener('click', function() {
+      stop=!stop
+      this.innerHTML="拦截："+stop
+      console.log("拦截："+stop);
+    })
+
+    button.addEventListener('click', function () {
+      console.log('button');
+    }, flag);
+    second.addEventListener('click', function () {
+      console.log('second');
+    }, flag);
+    first.addEventListener('click', function () {
+      console.log('first');
+    }, flag);
+    body.addEventListener('click', function (e) {
+      console.log('body');
+      // 取消后续冒泡和捕获
+      if (stop) e.stopPropagation()
+    }, flag);
+    html.addEventListener('click', function () {
+      console.log('html');
+    }, flag);
+    document.addEventListener('click', function () {
+      console.log('document');
+    }, flag);
+    window.addEventListener('click', function () {
+      console.log('window');
+    }, flag);
+  </script>
+</body>
+</html>

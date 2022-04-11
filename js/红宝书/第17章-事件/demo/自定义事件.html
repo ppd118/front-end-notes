@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>第2s触发用Event创建的事件，第4s触发用CustomEvent创建的事件</p>
+    <div id="a">aaa</div>
+    <script>
+        let a=document.querySelector('#a')
+        // Event创建事件
+        let myEvent1=new Event("myevent1",{"bubbles": true,"cancelable": true})
+        // 事件监听
+        document.addEventListener("myevent1",function(){
+            console.log("用Event()构造函数创建事件")
+        })
+
+        // CustomEvent创建事件
+        let myEvent2=new CustomEvent("myevent2",{
+            "detail": {"name": "用CustomEvent()构造函数创建事件"},
+            "bubbles": true,
+            "cancelable": true
+        })
+        // 事件监听
+        document.addEventListener("myevent2",function(event){
+            console.log(event.detail.name)
+        })
+
+        // 触发事件
+        
+        setTimeout(() => a.dispatchEvent(myEvent1), 2000);
+        setTimeout(() => document.dispatchEvent(myEvent2), 4000);
+    </script>
+    
+</body>
+</html>

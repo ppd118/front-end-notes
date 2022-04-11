@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            /* 请给一个200*200的盒子，上边框为红色，其余为蓝色 */
+            width: 200px;
+            height: 200px;
+            border: 5px solid blue;
+            /* 利用层叠性 */
+            border-top: 5px dashed red;
+            /* 1值上下左右；2值上下，左右；3值上，左右，下；4值上，右，下，左 */
+            padding: 15px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">如果今天，事已至此，大家就先吃饭吧。</div>
+</body>
+
+</html>
