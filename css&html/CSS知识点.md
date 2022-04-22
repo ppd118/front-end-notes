@@ -78,18 +78,24 @@ float属性的属性值含义：
 
 通过position属性来设置
 
-| 值       | 语义                                                         |
-| -------- | ------------------------------------------------------------ |
-| static   | 静态定位                                                     |
-| relative | 相对定位，元素移动位置是相对于它自身原位置而言的(原位置左上角坐标为移动坐标原点)，并且原位置仍保留 |
+| 值       | 语义                                                                                                                       |
+| -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| static   | 静态定位                                                                                                                   |
+| relative | 相对定位，元素移动位置是相对于它自身原位置而言的(原位置左上角坐标为移动坐标原点)，并且原位置仍保留                         |
 | absolute | 绝对定位，**相对于最近一级有定位的祖先元素移动**，若无祖先元素或祖先元素无定位则以浏览器为准定位。不再占有原有位置。 |
-| fixed    | 固定定位，浏览器页面滚动但是元素显示固定。以浏览器可视窗口为参照点，跟父元素没有关系，不占有原先位置。 |
+| fixed    | 固定定位，浏览器页面滚动但是元素显示固定。以浏览器可视窗口为参照点，跟父元素没有关系，不占有原先位置。                     |
 
 ==子绝父相==
 
 ![](image/CSS知识点/定位总结.png)
 
 加了**绝对定位的盒子无法通过 margin 0 auto进行居中**。使用left走父元素的50%，再用margin-left走自身宽度的一半（-width/2）。
+
+sticky: fixed+absolute
+
+元素根据正常文档流进行定位，然后相对它的*最近滚动祖先（nearest scrolling ancestor）*和 [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block) (最近块级祖先 nearest block-level ancestor)，包括table-related元素，基于`top`, `right`, `bottom`, 和 `left`的值进行偏移。偏移值不会影响任何其他元素的位置。
+
+该值总是创建一个新的[层叠上下文（stacking context](https://developer.mozilla.org/en/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context)）。注意，一个sticky元素会“固定”在离它最近的一个拥有“滚动机制”的祖先上（当该祖先的`overflow` 是 `hidden`, `scroll`, `auto`, 或 `overlay`时），即便这个祖先不是最近的真实可滚动祖先。这有效地抑制了任何“sticky”行为
 
 **注意点：**
 
@@ -199,10 +205,10 @@ flex是flexible Box的缩写，意为弹性布局，任何一个容器都可以�
 ### flex布局子项常见属性
 
 * flex：子项对剩余空间占有的份数
-  * [`flex-grow`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex-grow)
-  * [`flex-shrink`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex-shrink)
-  * [`flex-basis`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex-basis)
 
+  * [`flex-grow`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex-grow)：扩张占剩余空间的份数，默认0
+  * [`flex-shrink`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex-shrink)：收缩相对自身的份数，默认1
+  * [`flex-basis`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex-basis)：元素在主轴初始化大小，默认auto
 * align-self：控制子项自己在侧轴的排列方式
 * order：属性定义子项的排列顺序
 
@@ -254,10 +260,10 @@ cursor属性
 | 属性值      | 描述     |
 | ----------- | -------- |
 | default     | 默认鼠标 |
-| pointer     | 小手🖐    |
-| move        | 移动💠    |
+| pointer     | 小手🖐   |
+| move        | 移动💠   |
 | text        | 文本 I   |
-| not-allowed | 禁止🚫    |
+| not-allowed | 禁止🚫   |
 
 #### 表单轮廓与表单域防止拖拽
 
@@ -423,10 +429,14 @@ transition: 要过渡的属性(全部all) 花费时间(s) 运动曲线(默认eas
             animation: move;
             /* 持续时间 */
             animation-duration: 2s;
-        }
+      
 ```
 
-![动画常见属性](image/CSS知识点/1646376554497.png)
+![1649658696439.png](image/CSS知识点/1649658696439.png)
+
+![1649658706070.png](image/CSS知识点/1649658706070.png)
+
+![1649658713387.png](image/CSS知识点/1649658713387.png)
 
 动画属性简写：animation: 动画名称 持续时间 运动曲线 何时开始 播放次数 是否反向 动画起始或者结束的状态。
 
@@ -438,11 +448,11 @@ transition: 要过渡的属性(全部all) 花费时间(s) 运动曲线(默认eas
 
 * 坐标系
 
-  ![img](image/CSS知识点/1646379630426.png)
+  ![1649658626500.png](image/CSS知识点/1649658626500.png)
 * **3D位移-translate3d(x,y,z)**，xyz不能省略没有写0，translateZ(z)单位一般跟px
 * **透视：perspective**：Npx，近大远小，**透视写在被观察元素的父盒子上。d是视距，z为z轴。**
 
-  ![img](image/CSS知识点/1646380150300.png)
+  ![1649658645345.png](image/CSS知识点/1649658645345.png)
 * **3D旋转-rotate3d(x,y,z)**，让元素沿着x,y,z或自定义轴进行旋转。左手准则，大拇指指向x轴方向，其余四指弯曲方向为默认旋转方向。
 
   * transform:rotateX(45deg)
@@ -463,12 +473,8 @@ transition: 要过渡的属性(全部all) 花费时间(s) 运动曲线(默认eas
 ## 6. 新的选择器
 
 * 属性选择器，[],[title],[class='nav']
-
 * 结构伪类选择器，nth-child(n)数字，关键词（enven,odd),公式（3n+1),nth-of-type(n)根据类型选择
-
 * 伪元素选择器，::before，::after
-
-  ![image-20220309220058849](C:\Users\peipei\AppData\Roaming\Typora\typora-user-images\image-20220309220058849.png)
 
 # CSS面经
 
@@ -484,8 +490,8 @@ transition: 要过渡的属性(全部all) 花费时间(s) 运动曲线(默认eas
   - body(BFC元素)
   - float: left|right
   - overflow: hidden | scroll | auto; 非visible
-  - display: inline-block | table-cell |table-caption | flex | grid 非block非none
-  - position: absolute | fiexed 
+  - display: inline-block | table-cell |table-caption | flex | grid **非block非none**
+  - position: absolute | fiexed
 - 解决问题
   - margin重合：例如上下盒子都设置margin值为10，但是显示总的margin只有10而不是20。将塌陷元素分别包在一个包含以上任意属性的盒子内即可解决问题，例如设置父盒子为overflow:hidden。
   - margin塌陷，父子margin会合并
@@ -504,13 +510,24 @@ transition: 要过渡的属性(全部all) 花费时间(s) 运动曲线(默认eas
 
 ## 3. 层叠等级
 
-![](image/CSS知识点/1646203251507.png)
+![](image/CSS知识点/1646203251507.png)![1649658653093.png](image/CSS知识点/1649658653093.png)
 
 ## 4. 居中方法
 
 - 左右居中
-- 上下居中
+  - ``margin:0 auto``
+
+- 垂直居中
 
 ## 5. 选择器权重
 
-!important > 内联样式 = 外联样式 > ID选择器 > 类选择器 = 伪类选择器 = 属性选择器 > 元素选择器 = 伪元素选择器 > 通配选择器 = 后代选择器 = 兄弟选择器
+* `!important`
+* 内联样式（`1000`）
+* ID选择器（`0100`）
+* 类选择器/属性选择器/伪类选择器（`0010`）
+* 元素选择器/伪元素选择器（`0001`）
+* 关系选择器/通配符选择器（`0000）`
+
+**注意：**!important有失效情况，当遇到min-width,min-height时。例如例如当标签属性有min-width：500px，max-width:200px，width：300px !important时仍以min-width为准。
+
+## 6.canvas与svg区别

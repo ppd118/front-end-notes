@@ -74,7 +74,7 @@ TLS/SSL的功能实现主要依赖三类基本算法：**散列函数hash**、**
 3. 服务器用私钥解密，获取随机数1
 4. 客户端和服务器都有随机数1了，之后的通信都使用这个数进行对称加密
 
-<img src="https://luryblog.oss-cn-beijing.aliyuncs.com/noteImg/HTTPS/image-20220409174219331-16494973405802.png" alt="image-20220409174219331" style="zoom:50%;" />
+<img src=".\img\HTTPS\image-20220409174219331-16494973405802.png" alt="image-20220409174219331" style="zoom:50%;" />
 
 ### 中间人攻击
 
@@ -87,7 +87,7 @@ TLS/SSL的功能实现主要依赖三类基本算法：**散列函数hash**、**
 - 这样黑客可以获取所有与用户的通信
 - 同时黑客再伪装成客户端去跟服务器通信
 
-<img src="https://luryblog.oss-cn-beijing.aliyuncs.com/noteImg/HTTPS/image-20220409174302047-16494973854263.png" alt="image-20220409174302047" style="zoom:50%;" />
+<img src=".\img\HTTPS\image-20220409174302047-16494973854263.png" alt="image-20220409174302047" style="zoom:50%;" />
 
 ### 数字证书
 
@@ -103,13 +103,13 @@ TLS/SSL的功能实现主要依赖三类基本算法：**散列函数hash**、**
 
 这个方法最要的是认证中心的可靠性，一般**浏览器里会内置一些顶层的认证中心的证书**，相当于我们自动信任了他们，只有这样才能保证数据的安全。
 
-<img src="https://luryblog.oss-cn-beijing.aliyuncs.com/noteImg/HTTPS/1603965685765-ffc9a525-ccad-43f0-bb25-8e17281d68fe.png" alt="image" style="zoom:75%;" />
+<img src=".\img\HTTPS\1603965685765-ffc9a525-ccad-43f0-bb25-8e17281d68fe.png" alt="image" style="zoom:75%;" />
 
 ## HTTPS握手过程
 
-<img src="https://luryblog.oss-cn-beijing.aliyuncs.com/noteImg/HTTPS/image-20220409161130494-16494918954901.png" alt="image-20220409161130494" style="zoom:33%;" />
+<img src=".\img\HTTPS\image-20220409161130494-16494918954901.png" alt="image-20220409161130494" style="zoom:33%;" />
 
-<img src="https://luryblog.oss-cn-beijing.aliyuncs.com/noteImg/HTTPS/image-20220409180911914.png" alt="image-20220409180911914" style="zoom:50%;" />
+<img src=".\img\HTTPS\image-20220409180911914.png" alt="image-20220409180911914" style="zoom:50%;" />
 
 HTTPS的通信过程如下：
 
